@@ -40,7 +40,7 @@ class Posts extends Component {
     render() {
         const posts = this.state.posts.map(post => {
             return (
-                    <Link to={"/full-post/"+post.id} key={post.id} >
+                    <Link to={"/posts/full-post/"+post.id} key={post.id} >
                         <Post 
                         title={post.title} 
                         key={post.id}
@@ -55,7 +55,7 @@ class Posts extends Component {
                 <section className="Posts">
                         {posts}
                 </section>
-                <Route path="/full-post/:id" component={FullPost} />
+                <Route path="/posts/full-post/:id" component={FullPost} />
             </div>
         );
     }
