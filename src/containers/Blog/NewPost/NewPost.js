@@ -10,7 +10,9 @@ class NewPost extends Component {
         content: '',
         author: 'Prats',
         isPostSuccessfullySaved: false,
-        isError: false
+        isError: false,
+        isLoading: false,
+        isDisplayForm: true
     }
 
     postDataHandler = () => {
@@ -19,15 +21,15 @@ class NewPost extends Component {
             body: this.state.content,
             author: this.state.author
         };
-        axios.post("/qwqw", data)
+        this.setState({ isLoading: true });
+        axios.post("/", data)
             .then(respData => {
-                //this.setState({ isPostSuccessfullySaved: true });
-                this.props.history.push('/posts');
+                this.setState({ isPostSuccessfullySaved: true, isLoading: false });
+                //this.props.history.push('/posts');
             })
             .catch(err => {
-                //this.setState({ isError: true });
-                this.props.history.push('/pageNotFound');
-                debugger;
+                this.setState({ isError: true, isLoading: false });
+                //this.props.history.push('/pageNotFound');
             });
     }
 
