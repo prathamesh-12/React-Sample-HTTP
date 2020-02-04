@@ -23,6 +23,10 @@
 }
 
 .Blogs ul li a:hover, 
-.Blogs ul li a:active {
+.Blogs ul li a:active{
     color: brown;
+}
+.Blogs ul li a.active {
+    color: brown;
+    text-decoration: underline;
 }

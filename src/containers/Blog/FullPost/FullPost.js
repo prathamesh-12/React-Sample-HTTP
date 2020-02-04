@@ -9,10 +9,18 @@ class FullPost extends Component {
         fetchedPost: null
     };
 
+    componentDidMount() {
+        this.loadPost();
+    }
+    
     componentDidUpdate() {
-        if(this.props.id) {
-            if(!this.state.fetchedPost || (this.state.fetchedPost && (this.state.fetchedPost.id !== this.props.id))) {
-                axios.get('/'+this.props.id)
+        this.loadPost();
+    }
+    
+    loadPost() {
+        if(this.props.match.params.id) {
+            if(!this.state.fetchedPost || (this.state.fetchedPost && (this.state.fetchedPost.id != this.props.match.params.id))) {
+                axios.get('/'+this.props.match.params.id)
                     .then(resp => {
                         this.setState({fetchedPost: resp.data});
                     })
@@ -25,7 +33,7 @@ class FullPost extends Component {
 
     render () {
         let post = <p style={{textAlign: 'center', color: '#0070C0'}}>Please select a Post!</p>;
-        if(this.props.id) {
+        if(this.props.match.params.id) {
             post = <p style={{textAlign: 'center', color: '#0070C0'}}>Loading...!</p>;
         }
         if(this.state.fetchedPost) {
